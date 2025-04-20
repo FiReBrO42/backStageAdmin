@@ -3,12 +3,10 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: ['product'] # 只在 product 分支推送時觸發
-  pull_request:
-    branches: ['product'] # 當有 PR 到 product 分支時觸發
   workflow_dispatch: # 允許手動觸發
 
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
@@ -44,15 +42,9 @@ jobs:
         env:
           NODE_ENV: production
 
-      - name: Setup Pages
-        uses: actions/configure-pages@v4
-
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+      - name: Deploy to GitHub Pages 🚀
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
-          path: './dist'
-
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
-        if: github.ref == 'refs/heads/product' # 只在 product 分支上部署
+          folder: dist # 要部署的資料夾
+          branch: gh-pages # 部署的目標分支
+          token: ${{ secrets.GITHUB_TOKEN }} # 使用默認的 GITHUB_TOKEN
