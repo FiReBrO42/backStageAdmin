@@ -1,5 +1,8 @@
 <template>
 	<div class="login-container">
+		<!-- 添加 Loading 組件 -->
+		<Loading :visible="isLoading" :text="t('common.loading')" />
+
 		<div class="login-content">
 			<!-- 左側圖片區域 -->
 			<div class="login-image">
@@ -67,6 +70,7 @@ import { useRouter } from 'vue-router'
 import { useUserStore } from '@/stores/user'
 import { useI18n } from 'vue-i18n'
 import LanguageSwitch from '@/components/LanguageSwitch.vue'
+import Loading from '@/components/Loading.vue'
 
 const router = useRouter()
 const userStore = useUserStore()
@@ -99,6 +103,8 @@ const handleSubmit = async () => {
 		userStore.setToken(mockToken)
 		userStore.setUserInfo(mockUserInfo)
 
+		await new Promise(resolve => setTimeout(resolve, 1500))
+
 		await router.push('/')
 	} catch (error) {
 		console.error(
@@ -111,6 +117,7 @@ const handleSubmit = async () => {
 			}
 		)
 	} finally {
+		await new Promise(resolve => setTimeout(resolve, 1500))
 		isLoading.value = false
 	}
 }
