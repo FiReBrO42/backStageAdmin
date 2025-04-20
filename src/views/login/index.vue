@@ -10,9 +10,14 @@
 
 			<!-- 右側登入表單 -->
 			<div class="login-box">
+				<!-- 添加語言切換器 -->
+				<div class="language-switcher">
+					<LanguageSwitch />
+				</div>
+
 				<div class="logo-section">
-					<h1 class="brand">Chestnut Dessert</h1>
-					<p class="subtitle">ADMIN</p>
+					<h1 class="brand">{{ t('login.title') }}</h1>
+					<p class="subtitle">{{ t('login.subtitle') }}</p>
 				</div>
 
 				<div class="social-login">
@@ -26,29 +31,30 @@
 
 				<form @submit.prevent="handleSubmit" class="login-form">
 					<div class="form-item">
-						<label for="email">E-mail</label>
-						<input type="email" id="email" v-model="formData.email" placeholder="sample@mail.com" required />
+						<label for="email">{{ t('login.email') }}</label>
+						<input type="email" id="email" v-model="formData.email" :placeholder="t('login.emailPlaceholder')"
+							required />
 					</div>
 					<div class="form-item">
-						<label for="password">Password</label>
+						<label for="password">{{ t('login.password') }}</label>
 						<div class="password-input">
 							<input :type="showPassword ? 'text' : 'password'" id="password" v-model="formData.password"
-								placeholder="**************" required />
+								:placeholder="t('login.passwordPlaceholder')" required />
 							<button type="button" class="toggle-password" @click="togglePassword">
 								<i :class="showPassword ? 'far fa-eye-slash' : 'far fa-eye'"></i>
 							</button>
 						</div>
 						<div class="forgot-password">
-							<a href="#" @click.prevent="handleForgotPassword">Forgot Password?</a>
+							<a href="#" @click.prevent="handleForgotPassword">{{ t('login.forgotPassword') }}</a>
 						</div>
 					</div>
 					<button type="submit" class="submit-btn" :disabled="isLoading">
-						{{ isLoading ? 'Signing in...' : 'Sign In' }}
+						{{ isLoading ? t('login.signingIn') : t('login.signIn') }}
 					</button>
 				</form>
 
 				<div class="register-link">
-					New here? <a href="#" @click.prevent="handleRegister">Register Now!</a>
+					{{ t('login.newUser') }} <a href="#" @click.prevent="handleRegister">{{ t('login.register') }}</a>
 				</div>
 			</div>
 		</div>
@@ -59,9 +65,12 @@
 import { ref, reactive } from 'vue'
 import { useRouter } from 'vue-router'
 import { useUserStore } from '@/stores/user'
+import { useI18n } from 'vue-i18n'
+import LanguageSwitch from '@/components/LanguageSwitch.vue'
 
 const router = useRouter()
 const userStore = useUserStore()
+const { t } = useI18n()
 const isLoading = ref(false)
 const showPassword = ref(false)
 
@@ -169,6 +178,7 @@ const handleRegister = () => {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
+	position: relative;
 
 	@media (max-width: $screen-md) {
 		width: 100%;
@@ -392,6 +402,24 @@ const handleRegister = () => {
 
 	.login-box {
 		overflow-y: auto;
+	}
+}
+
+// 添加語言切換器樣式
+.language-switcher {
+	position: absolute;
+	top: 20px;
+	right: 20px;
+	z-index: 10;
+
+	:deep(.language-switch) {
+		.language-switch__current {
+			color: $text-color;
+
+			&:hover {
+				background-color: rgba($primary-color, 0.1);
+			}
+		}
 	}
 }
 </style>

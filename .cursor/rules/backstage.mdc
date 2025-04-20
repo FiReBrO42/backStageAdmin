@@ -1,0 +1,18 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# 專案環境
+- node 為 v20
+- 使用 npm
+
+# 部屬流程
+- 開發分支為 develop
+- 產品部屬分支為 product
+- 開發僅在 develop 中完成，檢查沒問題後，才可合併到 product中
+
+# 語系檔
+- 語系目前為 tw , en
+- 使用google翻譯作為國家的翻譯
+- 除非指定修正該國家語系檔案，否則所有語系檔案需要做到同步修改

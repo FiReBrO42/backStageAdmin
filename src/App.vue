@@ -3,9 +3,11 @@ import { onMounted } from 'vue'
 import { useUserStore } from '@/stores/user'
 import { useRouter } from 'vue-router'
 import '@/assets/styles/main.scss'
+import { useI18n } from 'vue-i18n'
 
 const userStore = useUserStore()
 const router = useRouter()
+const { t } = useI18n()
 
 onMounted(() => {
   const token = localStorage.getItem('token')
@@ -18,10 +20,19 @@ onMounted(() => {
 </script>
 
 <template>
-  <router-view></router-view>
+  <div class="app-container">
+    <router-view v-slot="{ Component }">
+      <component :is="Component" />
+    </router-view>
+  </div>
 </template>
 
-<style scoped>
+<style lang="scss">
+.app-container {
+  min-height: 100vh;
+  background-color: #f5f7fa;
+}
+
 .logo {
   height: 6em;
   padding: 1.5em;
