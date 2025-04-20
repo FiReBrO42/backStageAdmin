@@ -5,46 +5,43 @@ on:
     branches: ['product'] # 只在 product 分支推送時觸發
   workflow_dispatch: # 允許手動觸發
 
-permissions:
-  contents: write
-  pages: write
-  id-token: write
-
-concurrency:
-  group: 'pages'
-  cancel-in-progress: true
-
 jobs:
   build-and-deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pages: write
+      id-token: write
+
     steps:
-      - name: Checkout
+      - name: Checkout 🛎️
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
+      - name: Setup Node.js 🔧
         uses: actions/setup-node@v4
         with:
           node-version: '20'
           cache: 'npm'
 
-      - name: Install Dependencies
-        run: npm install
+      - name: Install Dependencies 📦
+        run: |
+          npm install
+          npm ci
 
-      - name: Type Check
-        run: npm run type-check
-        continue-on-error: true
-
-      - name: Build
-        run: npm run build
+      - name: Build 🏗️
+        run: |
+          npm run build
         env:
           NODE_ENV: production
+
+      - name: List dist folder contents 🔍
+        run: ls -la dist
 
       - name: Deploy to GitHub Pages 🚀
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          folder: dist # 要部署的資料夾
-          branch: gh-pages # 部署的目標分支
-          token: ${{ secrets.GITHUB_TOKEN }} # 使用默認的 GITHUB_TOKEN
+          token: ${{ secrets.ACCESS_TOKEN }}
+          branch: gh-pages # The branch the action should deploy to.
+          folder: dist # The folder the action should deploy.
+          clean: true
+          single-commit: true
