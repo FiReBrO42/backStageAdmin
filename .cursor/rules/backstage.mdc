@@ -1,6 +1,11 @@
 ---
 description: 
 globs: 
+alwaysApply: false
+---
+---
+description: 
+globs: 
 alwaysApply: true
 ---
 # 專案環境
@@ -16,3 +21,6 @@ alwaysApply: true
 - 語系目前為 tw , en
 - 使用google翻譯作為國家的翻譯
 - 除非指定修正該國家語系檔案，否則所有語系檔案需要做到同步修改
+
+# console.log
+- 使用console.log，開頭需添加🚀此符號，並接續以下格式'[檔名][參數名][作用描述]'，範例為:"🚀[login.vue][handleSubmit()][mockToken][token名]"

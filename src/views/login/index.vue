@@ -101,7 +101,15 @@ const handleSubmit = async () => {
 
 		await router.push('/')
 	} catch (error) {
-		console.error('登入失敗:', error)
+		console.error(
+			'🚀 [Login/handleSubmit]',
+			'登入失敗',
+			{
+				email: formData.email,
+				errorMessage: error instanceof Error ? error.message : '未知錯誤',
+				timestamp: new Date().toISOString()
+			}
+		)
 	} finally {
 		isLoading.value = false
 	}
@@ -109,12 +117,28 @@ const handleSubmit = async () => {
 
 const handleForgotPassword = () => {
 	// TODO: 實現忘記密碼功能
-	console.log('Forgot password clicked')
+	console.warn(
+		'🚀 [Login/handleForgotPassword]',
+		'功能尚未實現',
+		{
+			feature: '忘記密碼',
+			status: 'pending',
+			timestamp: new Date().toISOString()
+		}
+	)
 }
 
 const handleRegister = () => {
 	// TODO: 實現註冊功能
-	console.log('Register clicked')
+	console.warn(
+		'🚀 [Login/handleRegister]',
+		'功能尚未實現',
+		{
+			feature: '註冊',
+			status: 'pending',
+			timestamp: new Date().toISOString()
+		}
+	)
 }
 </script>
 
