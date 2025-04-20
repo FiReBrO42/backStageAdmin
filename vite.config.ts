@@ -46,13 +46,13 @@ export default defineConfig({
   },
   server: {
     host: true,
-    port: 3000,
+    port: 5173,
     open: true,
     cors: true,
     // 代理配置
     proxy: {
       '/api': {
-        target: 'http://localhost:8080',
+        target: 'http://localhost:5173',
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, '')
       }
