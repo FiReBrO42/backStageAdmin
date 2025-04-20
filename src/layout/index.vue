@@ -1,9 +1,8 @@
 <template>
-	<div>2222</div>
-	<!-- <div class="layout">
+	<div class="layout">
 		<aside class="sidebar" :class="{ collapsed: isSidebarCollapsed }">
 			<div class="logo">
-				<img src="@/assets/logo.png" alt="Logo" />
+				<img src="@/assets/images/img-logo.png" alt="Logo" />
 				<span v-if="!isSidebarCollapsed">工作室後台</span>
 			</div>
 			<nav class="menu">
@@ -31,9 +30,9 @@
 				<router-view></router-view>
 			</main>
 		</div>
-	</div> -->
+	</div>
 </template>
-<!-- 
+
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
@@ -192,4 +191,4 @@ const handleLogout = async () => {
 	padding: $content-padding;
 	overflow-y: auto;
 }
-</style> -->
+</style>

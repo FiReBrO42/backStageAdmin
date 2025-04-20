@@ -6,6 +6,11 @@ alwaysApply: false
 ---
 description: 
 globs: 
+alwaysApply: false
+---
+---
+description: 
+globs: 
 alwaysApply: true
 ---
 # 專案環境
@@ -15,7 +20,10 @@ alwaysApply: true
 # 部屬流程
 - 開發分支為 develop
 - 產品部屬分支為 product
-- 開發僅在 develop 中完成，檢查沒問題後，才可合併到 product中
+## git to develop
+- 切換到 develop ，確保當前開發分支為 develop,並依照輸入的commit 上傳，並push 到遠端
+## product merge from develop
+- 將 develop分支 合併到 prodcut,並會觸發 github action CICD
 
 # 語系檔
 - 語系目前為 tw , en
